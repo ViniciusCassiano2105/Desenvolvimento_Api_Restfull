@@ -10,5 +10,5 @@ O repositório está organizado da seguinte forma:
 # 💡meus_Projetos
 - **Projetos desenvolvidos de forma prática, como forma de reforço e aplicação dos conceitos estudados. Esses projetos podem incluir desafios reais ou cenários simulados para resolução.**
   
-# 🚀trabalho_Individual
+# 🚀projeto_Individual_Api
 - **Projeto individual desenvolvido durante a disciplina, que serve como avaliação dos conhecimentos adquiridos.**
