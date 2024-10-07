@@ -28,9 +28,9 @@ public class SwaggerConfig {
 		server.setDescription("Development Server");
 
 		Contact contact = new Contact();
-		contact.setEmail("jgmoreira1809@gmail.com");
-		contact.setName("João Gabriel Moreira");
-		contact.setUrl("joaomoreira.net");
+		contact.setEmail("viniciuscassiano2105v@gmail.com");
+		contact.setName("Luiz Vinicius Cassiano Cunha");
+		contact.setUrl("viniciuscassiano.net");
 
 		License license = new License();
 		license.setName("Apache License 2.0");
