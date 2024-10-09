@@ -37,7 +37,7 @@ public class SwaggerConfig {
 		license.setUrl("https://www.apache.org/licenses/LICENSE-2.0.html");
 
 		Info info = new Info();
-		info.setTitle("Pessoa & Série API");
+		info.setTitle("Cinema & Filme API");
 		info.setVersion("1.0.0");
 		info.setDescription("API to manage people and series.");
 		info.setContact(contact);
