@@ -1,5 +1,6 @@
 package br.com.projeto.imperialflix.services;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Properties;
@@ -76,8 +77,30 @@ public class EmailService {
 			helper.setTo("diogoportelladantas1234@gmail.com");
 
 			String emailText = "<h1>Faça sentido</h1>" + "<p>Diogo é meu amigo!</p>" + "<p>Diogo é meu amigo!</p>"
-					+ "<p>na relíquia do Julio Braz " + dateTime.format(dateForm) + "</p>" + "<br>";
+					+ "<p>na relíquia do Julio Braz " 
+					+ dateTime.format(dateForm) + "</p>" 
+					
+					//ADICIONANDO IMAGEM NO E-MAIL
+					
+					//O cid:flamengoMaiorTime se refere a imagem que vou embutir no email(identificador)
+					+ "<br><img src='cid:flamengoMaiorTime'>"
+					+"<br>";
+			
 			helper.setText(emailText, true);
+			
+			//Referencia da imagem embutida no email, indicando o caminho da imagem
+            File flamengoMaiorTime = new File("C:\\Serratec\\api\\imagens\\images.jpeg");
+           
+            //Adiciona a imagem no e-mail com o identificad criado 'flamengoMaiorTime'.
+            helper.addInline("flamengoMaiorTime", flamengoMaiorTime);
+           
+            //Caminho da imagem que sera adicionado ao e-mail
+            File images = new File("C:\\Serratec\\api\\imagens\\images.jpeg");
+            
+            //Adiciona a imagem como um anexo. o nome "imagens" será o nome do arquivo no e-mail.
+            helper.addAttachment("images.jpg", images);
+			
+            //Envia o e-mail
 			javaMailSender.send(message);
 			return "email enviado com sucesso!";
 		} catch (MessagingException e) {
