@@ -62,4 +62,3 @@ A API oferece conversão do peso de uma pessoa em diferentes corpos celestes:
 Para rodar este projeto localmente, é necessário:
 - Java 17 ou superior
 - Maven 3.6+
-- PostgreSQL
