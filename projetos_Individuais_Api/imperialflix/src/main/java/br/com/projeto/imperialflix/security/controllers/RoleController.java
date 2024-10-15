@@ -12,22 +12,20 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.projeto.imperialflix.security.entities.Role;
 import br.com.projeto.imperialflix.security.services.RoleService;
 
-
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/roles")
 public class RoleController {
 	@Autowired
 	RoleService roleService;
-	
+
 	@PostMapping
 	public ResponseEntity<Role> save(@RequestBody Role role) {
 		Role newRole = roleService.save(role);
-		if(newRole != null)
+		if (newRole != null)
 			return new ResponseEntity<>(newRole, HttpStatus.CREATED);
 		else
 			return new ResponseEntity<>(newRole, HttpStatus.BAD_REQUEST);
 	}
 
 }
-

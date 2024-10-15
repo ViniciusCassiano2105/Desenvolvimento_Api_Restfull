@@ -35,7 +35,7 @@ import br.com.projeto.imperialflix.security.services.UserDetailsImpl;
 @RequestMapping("/auth")
 public class AuthController {
 	@Autowired
-	AuthenticationManager authenticationManager; 
+	AuthenticationManager authenticationManager;
 
 	@Autowired
 	UserRepository userRepository;
@@ -44,10 +44,10 @@ public class AuthController {
 	RoleRepository roleRepository;
 
 	@Autowired
-	PasswordEncoder encoder; 
+	PasswordEncoder encoder;
 
 	@Autowired
-	JwtUtils jwtUtils; 
+	JwtUtils jwtUtils;
 
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequestDTO loginRequest) {
@@ -97,9 +97,9 @@ public class AuthController {
 					break;
 				case "mod":
 					Role modRole = roleRepository.findByName(RoleEnum.ROLE_MODERATOR)
-					.orElseThrow(() -> new RuntimeException("Erro: Role não encontrada."));
+							.orElseThrow(() -> new RuntimeException("Erro: Role não encontrada."));
 					roles.add(modRole);
-					
+
 					break;
 				default:
 					Role userRole = roleRepository.findByName(RoleEnum.ROLE_USER)
