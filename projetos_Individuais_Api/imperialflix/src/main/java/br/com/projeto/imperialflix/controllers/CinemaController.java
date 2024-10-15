@@ -33,7 +33,7 @@ public class CinemaController {
 
     @PutMapping("/{id}")
     public Cinema updateCinema(@PathVariable Integer id, @RequestBody Cinema cinema) {
-        cinema.setId(id); // Set the ID explicitly
+        cinema.setId(id); 
         return cinemaService.save(cinema);
     }
 
