@@ -1,33 +1,49 @@
 package br.com.projeto.imperialflix.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import br.com.projeto.imperialflix.services.EmailService;
+import br.com.projeto.imperialflix.entities.Filme;
+import br.com.projeto.imperialflix.services.FilmeService;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/Filme")
+@RequestMapping("/filmes")
 public class FilmeController {
-	
-	@Autowired
-	EmailService emailService;
-		
-	@GetMapping
-	public String writerTeste() {
-		emailService.writerTeste();
-		return "Email enviado com sucesso";
-	}
-	
-	@GetMapping("/envioemail")
-	public String writerTeste2() {
-		emailService.writerTeste2();
-		return "Email enviado com sucesso";
-	}
-	@GetMapping("/mailsend")
-	public String mailSend() {
-		emailService.mailSend();
-		return "Email enviado com sucesso";
-	}
+
+    @Autowired
+    private FilmeService filmeService;
+
+    @GetMapping
+    public List<Filme> getAllFilmes() {
+        return filmeService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Filme> getFilmeById(@PathVariable Integer id) {
+        return filmeService.findById(id);
+    }
+
+    @PostMapping
+    public Filme createFilme(@RequestBody Filme filme) {
+        return filmeService.save(filme);
+    }
+
+    @PutMapping("/{id}")
+    public Filme updateFilme(@PathVariable Integer id, @RequestBody Filme filme) {
+        filme.setId(id); // Set the ID explicitly
+        return filmeService.save(filme);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteFilme(@PathVariable Integer id) {
+        filmeService.deleteById(id);
+    }
+
+    @GetMapping("/count")
+    public long getFilmeCount() {
+        return filmeService.getFilmeCount();
+    }
 }
