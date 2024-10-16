@@ -1,4 +1,4 @@
-package br.com.projeto.imperialflix.entities;
+package br.com.projeto.imperialflix.security.entities;
 
 import java.util.List;
 
@@ -7,7 +7,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -29,17 +31,31 @@ public class Cinema {
 
 	@Column(name = "cin_int_horario")
 	private String horario;
+	
+	@OneToOne
+    @JoinColumn(name = "end_int_id") 
+    private Endereco endereco; 
 
 	@OneToMany(mappedBy = "cinema")
 	private List<Filme> filmes;
 
-	public Cinema(Integer id, Integer sala, Double valor, String nome, String horario, List<Filme> filmes) {
+	public Cinema(Integer id, Integer sala, Double valor, String nome, String horario, Endereco endereco,
+			List<Filme> filmes) {
 		this.id = id;
 		this.sala = sala;
 		this.valor = valor;
 		this.nome = nome;
 		this.horario = horario;
+		this.endereco = endereco;
 		this.filmes = filmes;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Double getValor() {
@@ -48,14 +64,6 @@ public class Cinema {
 
 	public void setValor(Double valor) {
 		this.valor = valor;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 	public String getHorario() {
@@ -74,24 +82,23 @@ public class Cinema {
 		this.filmes = filmes;
 	}
 
-	public Integer getId() {
-		return id;
-	}
-	
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-
 	public Integer getSala() {
 		return sala;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
 	}
 
 	@Override
 	public String toString() {
 		return "Cinema [id=" + id + ", sala=" + sala + ", valor=" + valor + ", nome=" + nome + ", horario=" + horario
-				+ ", filmes=" + filmes + "]";
+				+ ", endereco=" + endereco + ", filmes=" + filmes + "]";
 	}
+
 
 }
