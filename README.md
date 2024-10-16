@@ -17,6 +17,58 @@ O repositório está organizado da seguinte forma:
 
 ---
 
+### 🎬 API ImperialFlix (Cinema/Filme)
+
+#### Descrição
+
+A **ImperialFlix API** foi desenvolvida para gerenciar a relação entre cinema e filmes. Ela oferece endpoints para criar, recuperar, atualizar e deletar cinemas e filmes.
+
+
+## 🔢 Endpoints
+
+### Operações de Cinema
+
+- `GET /cinemas`: Retorna a lista de cinema.
+- `GET /cinemas/{id}`: Retorna os detalhes de um cinema específico com base no ID.
+- `POST /cinemas`: Cria um novo cinema.
+- `PUT /cinemas/{id}`: Atualiza as informações de um cinema existente.
+- `DELETE /cinemas/{id}`: Remove um cinema pelo ID.
+- `GET /cinemas/count`: Retorna a quantidade total de cinemas cadastrados.
+
+### Operações de Filme
+
+- `GET /filmes`: Retorna a lista de todos os filmes.
+- `GET /filmes/{id}`: Retorna os detalhes de um filme específico com base no ID.
+- `POST /filmes`: Cria um novo filme.
+- `PUT /filmes/{id}`: Atualiza as informações de um filme existente.
+- `DELETE /filmes/{id}`: Remove um filme pelo ID.
+- `GET /filmes/count`: Retorna a quantidade total de filmes cadastrados.
+
+
+## 🌐 Relacionamento entre Entidades (OneToMany, ManyToOne, OneToOne)
+
+### ManyToOne (Muitos para Um)
+
+- Vários filmes podem estar associado a um cinema.
+
+### OneToMany (Um para Muitos)
+
+- Um cinema pode estar associado a vários filmes.
+
+### OneToOne (Um para Um)
+
+- Um cinema está associado a um único endereço.
+
+
+## Pré-requisitos
+
+Para rodar este projeto localmente, é necessário:
+
+- **Java 17** ou superior
+- **Maven 3.6+**
+
+---
+
 ## 🔢Calculadora API
 
 ### Descrição
@@ -64,7 +116,6 @@ A API oferece conversão do peso de uma pessoa em diferentes corpos celestes:
 - `GET /SeuPesoNoSistemaSolar/Seu Peso na Lua?pesoNaTerra={peso}`: Converte o peso da Terra para a Lua.
 - `GET /SeuPesoNoSistemaSolar/Seu Peso no Sol?pesoNaTerra={peso}`: Converte o peso da Terra para o Sol.
 
----
 
 ## Pré-requisitos
 
@@ -99,14 +150,6 @@ A API permite as seguintes operações:
 - `GET /veiculos/{id}`: Retorna os detalhes de um veículo específico pelo ID.
 - `GET /veiculos`: Lista todos os veículos cadastrados.
 
-### Estrutura de Dados - Veículo
-Um veículo é representado pela seguinte estrutura:
-
-- **id**: Identificador único do veículo.
-- **nome**: Marca do veículo.
-- **modelo**: Modelo do veículo.
-
----
 
 ## Pré-requisitos
 
