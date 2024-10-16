@@ -1,10 +1,10 @@
-package br.com.projeto.imperialflix.controllers;
+package br.com.projeto.imperialflix.security.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import br.com.projeto.imperialflix.entities.Cinema;
-import br.com.projeto.imperialflix.services.CinemaService;
+import br.com.projeto.imperialflix.security.entities.Cinema;
+import br.com.projeto.imperialflix.security.services.CinemaService;
 
 import java.util.List;
 import java.util.Optional;
