@@ -1,4 +1,4 @@
-package br.com.projeto.imperialflix.services;
+package br.com.projeto.imperialflix.security.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.projeto.imperialflix.entities.Filme;
-import br.com.projeto.imperialflix.repository.FilmeRepository;
+import br.com.projeto.imperialflix.security.entities.Filme;
+import br.com.projeto.imperialflix.security.repositories.FilmeRepository;
+
 
 @Service
 public class FilmeService {
