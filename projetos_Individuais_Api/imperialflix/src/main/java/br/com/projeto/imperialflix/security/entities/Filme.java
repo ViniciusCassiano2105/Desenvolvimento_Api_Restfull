@@ -1,4 +1,4 @@
-package br.com.projeto.imperialflix.entities;
+package br.com.projeto.imperialflix.security.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
