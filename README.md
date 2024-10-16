@@ -24,7 +24,7 @@ O repositório está organizado da seguinte forma:
 A **ImperialFlix API** foi desenvolvida para gerenciar a relação entre cinema e filmes. Ela oferece endpoints para criar, recuperar, atualizar e deletar cinemas e filmes.
 
 
-## 🔢 Endpoints
+## Endpoints
 
 ### Operações de Cinema
 
