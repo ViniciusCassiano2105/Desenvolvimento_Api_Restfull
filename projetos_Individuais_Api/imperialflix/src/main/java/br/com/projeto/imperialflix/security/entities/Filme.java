@@ -28,7 +28,7 @@ public class Filme {
     private Long duracao;
 
     @ManyToOne
-    @JoinColumn(name = "fk_cinema", nullable = false)
+    @JoinColumn(name = "cin_cd_id", nullable = false)
     private Cinema cinema;
 
     public Filme() {
