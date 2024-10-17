@@ -45,7 +45,7 @@ A **ImperialFlix API** foi desenvolvida para gerenciar a relação entre cinema 
 - `GET /filmes/count`: Retorna a quantidade total de filmes cadastrados.
 
 
-## Relacionamento entre Entidades (OneToMany, ManyToOne, OneToOne)
+## Relacionamento entre Entidades (OneToMany, ManyToOne, OneToOne, ManyToMany)
 
 ### ManyToOne (Muitos para Um)
 
