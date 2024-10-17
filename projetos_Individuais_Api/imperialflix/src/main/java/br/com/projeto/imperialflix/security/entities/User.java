@@ -43,8 +43,25 @@ public class User {
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-
 	private Set<Role> roles = new HashSet<>();
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "user_filme", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "filme_id"))
+	private Set<Filme> filmes = new HashSet<>();
+
+	public User(Integer id, @NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 50) @Email String email,
+			@NotBlank @Size(max = 120) String password, Set<Role> roles, Set<Filme> filmes) {
+		this.id = id;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.roles = roles;
+		this.filmes = filmes;
+	}
+
+	public Set<Filme> getFilmes() {
+		return filmes;
+	}
 
 	public User() {
 	}
@@ -94,4 +111,11 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + ", roles="
+				+ roles + ", filmes=" + filmes + "]";
+	}
+
 }
