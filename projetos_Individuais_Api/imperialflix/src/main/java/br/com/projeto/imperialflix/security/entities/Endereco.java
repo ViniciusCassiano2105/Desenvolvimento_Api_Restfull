@@ -42,7 +42,17 @@ public class Endereco {
         this.cinema = cinema;
     }
 
-    public Long getId() {
+    public Endereco(String cep, String logradouro, String complemento, String bairro,
+			String localidade, String regiao) {
+        this.cep = cep;
+        this.logradouro = logradouro;
+        this.complemento = complemento;
+        this.bairro = bairro;
+        this.localidade = localidade;
+        this.regiao = regiao;
+	}
+
+	public Long getId() {
         return id;
     }
 
