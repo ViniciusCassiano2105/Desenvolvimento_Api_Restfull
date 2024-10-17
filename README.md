@@ -59,6 +59,10 @@ A **ImperialFlix API** foi desenvolvida para gerenciar a relação entre cinema 
 
 - Um cinema está associado a um único endereço.
 
+### ManyToMany (Muitos para Muitos)
+
+- Vários usuários podem estar associados a vários filmes.
+- Vários filmes podem estar associados a vários usuários.
 
 ## Pré-requisitos
 
