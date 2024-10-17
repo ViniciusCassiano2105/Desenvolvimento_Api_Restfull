@@ -42,13 +42,15 @@ public class Endereco {
         this.cinema = cinema;
     }
 
-    public Endereco(String cep, String logradouro, String complemento, String bairro,
-			String localidade, String regiao) {
-        this.cep = cep;
+	public Endereco(String cep, String logradouro, String complemento, String bairro, String localidade,
+			String regiao, String uf, String estado) {
+		this.cep = cep;
         this.logradouro = logradouro;
         this.complemento = complemento;
         this.bairro = bairro;
         this.localidade = localidade;
+        this.uf = uf;
+        this.estado = estado;
         this.regiao = regiao;
 	}
 

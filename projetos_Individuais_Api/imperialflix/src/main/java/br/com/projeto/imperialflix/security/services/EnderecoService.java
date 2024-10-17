@@ -5,12 +5,19 @@ import org.springframework.stereotype.Service;
 
 import br.com.projeto.imperialflix.security.dto.EnderecoRequestDTO;
 import br.com.projeto.imperialflix.security.dto.EnderecoResponseDTO;
+import br.com.projeto.imperialflix.security.entities.Endereco;
+import br.com.projeto.imperialflix.security.repositories.EnderecoRepository;
 import br.com.projeto.imperialflix.utils.Util;
+
+
 
 @Service
 public class EnderecoService {
 	@Autowired
 	Util util;
+	
+	@Autowired
+	EnderecoRepository enderecoRepository;
 	
 //	public EnderecoResponseDTO consultarEndereco(String cep) {
 	//	EnderecoResponseDTO viaCep = util.buscarEndereco(cep);
@@ -39,6 +46,9 @@ public class EnderecoService {
 		endereco.setLogradouro(viaCep.getLogradouro());
 		endereco.setRegiao(viaCep.getRegiao());
 		endereco.setUf(viaCep.getUf());
+		
+		Endereco enderecoConvertido = endereco.toEndereco();
+		enderecoRepository.save(enderecoConvertido);
 		return endereco;
 	}
 }

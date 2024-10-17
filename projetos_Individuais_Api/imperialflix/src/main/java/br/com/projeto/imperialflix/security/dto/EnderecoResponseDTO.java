@@ -1,5 +1,7 @@
 package br.com.projeto.imperialflix.security.dto;
 
+import br.com.projeto.imperialflix.security.entities.Endereco;
+
 public class EnderecoResponseDTO {
 
 	private String cep;
@@ -73,6 +75,10 @@ public class EnderecoResponseDTO {
 
 	public void setRegiao(String regiao) {
 		this.regiao = regiao;
-	}
 
+	}
+	
+	public Endereco toEndereco() {
+		return new Endereco(this.cep, this.logradouro, this.complemento, this.bairro, this.localidade, this.regiao, this.uf, this.estado);
+	}
 }
