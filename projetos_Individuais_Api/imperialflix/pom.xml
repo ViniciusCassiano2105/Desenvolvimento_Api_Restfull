@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>br.com.imperialflix</groupId>
 	<artifactId>imperialflix</artifactId>
-	<version>4.0.0</version>
+	<version>4.1.0</version>
 	<name>imperialflix</name>
 	<description>Project for Spring Boot Imperialflix</description>
 	<url />
