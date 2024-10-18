@@ -1,5 +1,7 @@
 package br.com.projeto.imperialflix.security.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +52,26 @@ public class EnderecoService {
 		Endereco enderecoConvertido = endereco.toEndereco();
 		enderecoRepository.save(enderecoConvertido);
 		return endereco;
+	}
+
+	public EnderecoResponseDTO buscarEndereco(Integer id) {
+//		Endereco endereco = enderecoRepository.findById(id).get();
+		Optional <Endereco> endereco = enderecoRepository.findById(id);
+		EnderecoResponseDTO enderecoResponseDTO = new EnderecoResponseDTO();
+		enderecoResponseDTO.setBairro(endereco.get().getBairro());
+		enderecoResponseDTO.setCep(endereco.get().getCep());
+		enderecoResponseDTO.setComplemento(endereco.get().getComplemento());
+		enderecoResponseDTO.setEstado(endereco.get().getEstado());
+		enderecoResponseDTO.setLocalidade(endereco.get().getLocalidade());
+		enderecoResponseDTO.setLogradouro(endereco.get().getLogradouro());
+		enderecoResponseDTO.setRegiao(endereco.get().getRegiao());
+		enderecoResponseDTO.setUf(endereco.get().getUf());
+		return enderecoResponseDTO;
+	}
+	
+	public void deletarEndereco (Integer id) {
+		enderecoRepository.deleteById(id);
+		
 	}
 }
 
