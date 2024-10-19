@@ -1,5 +1,8 @@
 package br.com.redeImperialFlix.repository;
 
-public class CinemaRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
 
+import br.com.redeImperialFlix.entities.Cinema;
+
+public interface CinemaRepository extends JpaRepository<Cinema, Integer> {
 }
