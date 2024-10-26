@@ -1,7 +1,6 @@
 package br.com.projeto.imperialflix.security.entities;
 
 import java.util.List;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,90 +14,102 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "cinema")
 public class Cinema {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "fil_cd_id")
-	private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "fil_cd_id")
+    private Integer id;
 
-	@Column(name = "cin_int_sala")
-	private Integer sala;
+    @Column(name = "cin_int_sala")
+    private Integer sala;
 
-	@Column(name = "cin_int_valor")
-	private Double valor;
+    @Column(name = "cin_int_valor")
+    private Double valor;
 
-	@Column(name = "cin_int_nome")
-	private String nome;
+    @Column(name = "cin_int_nome")
+    private String nome;
 
-	@Column(name = "cin_int_horario")
-	private String horario;
-	
-	@OneToOne
+    @Column(name = "cin_int_horario")
+    private String horario;
+
+    @OneToOne
     @JoinColumn(name = "end_int_id") 
     private Endereco endereco; 
 
-	@OneToMany(mappedBy = "cinema")
-	private List<Filme> filmes;
+    @OneToMany(mappedBy = "cinema")
+    private List<Filme> filmes;
 
-	public Cinema(Integer id, Integer sala, Double valor, String nome, String horario, Endereco endereco,
-			List<Filme> filmes) {
-		this.id = id;
-		this.sala = sala;
-		this.valor = valor;
-		this.nome = nome;
-		this.horario = horario;
-		this.endereco = endereco;
-		this.filmes = filmes;
-	}
+    public Cinema() {
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public Cinema(Integer id, Integer sala, Double valor, String nome, String horario, Endereco endereco, List<Filme> filmes) {
+        this.id = id;
+        this.sala = sala;
+        this.valor = valor;
+        this.nome = nome;
+        this.horario = horario;
+        this.endereco = endereco;
+        this.filmes = filmes;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public Double getValor() {
-		return valor;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setValor(Double valor) {
-		this.valor = valor;
-	}
+    public Integer getSala() {
+        return sala;
+    }
 
-	public String getHorario() {
-		return horario;
-	}
+    public void setSala(Integer sala) {
+        this.sala = sala;
+    }
 
-	public void setHorario(String horario) {
-		this.horario = horario;
-	}
+    public Double getValor() {
+        return valor;
+    }
 
-	public List<Filme> getFilmes() {
-		return filmes;
-	}
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
 
-	public void setFilmes(List<Filme> filmes) {
-		this.filmes = filmes;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public Integer getSala() {
-		return sala;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public String getHorario() {
+        return horario;
+    }
 
-	public Endereco getEndereco() {
-		return endereco;
-	}
+    public void setHorario(String horario) {
+        this.horario = horario;
+    }
 
-	@Override
-	public String toString() {
-		return "Cinema [id=" + id + ", sala=" + sala + ", valor=" + valor + ", nome=" + nome + ", horario=" + horario
-				+ ", endereco=" + endereco + ", filmes=" + filmes + "]";
-	}
+    public Endereco getEndereco() {
+        return endereco;
+    }
 
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
 
+    public List<Filme> getFilmes() {
+        return filmes;
+    }
+
+    public void setFilmes(List<Filme> filmes) {
+        this.filmes = filmes;
+    }
+
+    @Override
+    public String toString() {
+        return "Cinema [id=" + id + ", sala=" + sala + ", valor=" + valor + ", nome=" + nome + ", horario=" + horario
+                + ", endereco=" + endereco + "]";
+    }
 }
