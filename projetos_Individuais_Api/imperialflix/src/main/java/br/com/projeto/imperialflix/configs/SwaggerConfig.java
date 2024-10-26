@@ -38,7 +38,7 @@ public class SwaggerConfig {
 
 		Info info = new Info();
 		info.setTitle("Cinema & Filme API");
-		info.setVersion("4.2.1");
+		info.setVersion("4.3.1");
 		info.setDescription("API to manage people and series.");
 		info.setContact(contact);
 		info.setLicense(license);
