@@ -1,5 +1,4 @@
 package br.com.projeto.imperialflix.security.entities;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
