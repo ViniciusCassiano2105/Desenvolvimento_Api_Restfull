@@ -29,7 +29,9 @@ public class Endereco {
     public Endereco() {
     }
 
-    public Endereco(Long id, String cep, String logradouro, String complemento, String bairro, String localidade, String uf, String estado, String regiao, Cinema cinema) {
+    public Endereco(Long id, String cep, String logradouro, String complemento, 
+                    String bairro, String localidade, String uf, 
+                    String estado, String regiao, Cinema cinema) {
         this.id = id;
         this.cep = cep;
         this.logradouro = logradouro;
@@ -42,9 +44,9 @@ public class Endereco {
         this.cinema = cinema;
     }
 
-	public Endereco(String cep, String logradouro, String complemento, String bairro, String localidade,
-			String regiao, String uf, String estado) {
-		this.cep = cep;
+    public Endereco(String cep, String logradouro, String complemento, String bairro, 
+                    String localidade, String regiao, String uf, String estado) {
+        this.cep = cep;
         this.logradouro = logradouro;
         this.complemento = complemento;
         this.bairro = bairro;
@@ -52,9 +54,9 @@ public class Endereco {
         this.uf = uf;
         this.estado = estado;
         this.regiao = regiao;
-	}
+    }
 
-	public Long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -136,8 +138,9 @@ public class Endereco {
 
     @Override
     public String toString() {
-        return "Endereco [id=" + id + ", cep=" + cep + ", logradouro=" + logradouro + ", complemento=" + complemento
-                + ", bairro=" + bairro + ", localidade=" + localidade + ", uf=" + uf
-                + ", estado=" + estado + ", regiao=" + regiao + ", cinema=" + cinema + "]";
+        return "Endereco [id=" + id + ", cep=" + cep + ", logradouro=" + logradouro + 
+               ", complemento=" + complemento + ", bairro=" + bairro + 
+               ", localidade=" + localidade + ", uf=" + uf + ", estado=" + estado + 
+               ", regiao=" + regiao + ", cinema=" + cinema + "]";
     }
 }
