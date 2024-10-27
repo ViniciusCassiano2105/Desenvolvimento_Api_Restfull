@@ -21,8 +21,8 @@ public class Filme {
     @Column(name = "fil_tx_nome")
     private String nome;
 
-    @Column(name = "fil_int_genero")
-    private Long genero;
+    @Column(name = "fil_tx_genero") 
+    private String genero;
 
     @Column(name = "fil_int_duracao")
     private Long duracao;
@@ -34,7 +34,7 @@ public class Filme {
     public Filme() {
     }
 
-    public Filme(Integer id, String nome, Long genero, Long duracao, Cinema cinema) {
+    public Filme(Integer id, String nome, String genero, Long duracao, Cinema cinema) {
         this.id = id;
         this.nome = nome;
         this.genero = genero;
@@ -45,29 +45,40 @@ public class Filme {
     public Integer getId() {
         return id;
     }
-    
+
     public void setId(Integer id) {
-		this.id = id;
-	}
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
     }
 
-    public Long getGenero() {
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getGenero() {
         return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
 
     public Long getDuracao() {
         return duracao;
     }
 
+    public void setDuracao(Long duracao) {
+        this.duracao = duracao;
+    }
+
     public Cinema getCinema() {
         return cinema;
     }
 
-
-	public void setCinema(Cinema cinema) {
+    public void setCinema(Cinema cinema) {
         this.cinema = cinema;
     }
 
