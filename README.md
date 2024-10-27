@@ -1,165 +1,188 @@
-# 📚 Repositório de Desenvolvimento API Restful
+# ImperialFlix
 
-Bem-vindo ao repositório de Desenvolvimento API Restful! Este repositório foi criado para organizar e documentar os projetos e práticas realizados durante o desenvolvimento de APIs seguindo o padrão RESTful.
+ImperialFlix é uma API RESTful desenvolvida em Spring Boot, projetada para gerenciar cinemas, filmes e usuários com autenticação e autorização baseadas em JWT. 
+Este projeto inclui operações CRUD completas para a entidade Cinema e operações em filmes, além de um sistema de envio de email, documentação com Swagger, e segurança JWT.
 
-## 📑 Conteúdo
+## Índice
+1. [Recursos](#recursos)
+2. [Arquitetura do Projeto](#arquitetura-do-projeto)
+3. [Configurações e Dependências](#configurações-e-dependências)
+4. [Como Executar](#como-executar)
+5. [Endpoints](#endpoints)
+6. [Diagrama ER](#diagrama-er)
+7. [Exemplos de Requisições](#exemplos-de-requisições)
 
-O repositório está organizado da seguinte forma:
+## Recursos
 
-### 📖 `aulas_Api`
-- **Códigos e exemplos práticos desenvolvidos durante as aulas teóricas, focando em conceitos fundamentais do desenvolvimento de APIs Restful.**
+- **CRUD Completo** para Cinema com opções de gerenciamento de filmes
+- **Autenticação JWT** para proteção de rotas
+- **Autorização baseada em papéis** (`USER` e `ADMIN`)
+- **Documentação da API com Swagger**
+- **Envio de Emails** com suporte para mensagens HTML e anexos
+- **Configuração CORS** permitindo origens configuráveis
+- **Logging e Monitoramento** com configurações detalhadas de logs
 
-### 💡 `meus_Projetos`
-- **Projetos desenvolvidos de forma prática, como forma de reforço e aplicação dos conceitos estudados. Esses projetos podem incluir desafios reais ou cenários simulados para resolução.**
+## Arquitetura do Projeto
 
-### 🚀 `projetos_Individuais_Api`
-- **Projeto individual desenvolvido durante a disciplina, que serve como avaliação dos conhecimentos adquiridos.**
+A estrutura do projeto segue uma organização modular com os seguintes pacotes principais:
 
----
+- **config**: Configurações da aplicação, incluindo Swagger.
+- **controllers**: Controladores para cada entidade, responsável por processar requisições HTTP.
+- **dto**: Objetos de transferência de dados (Data Transfer Objects).
+- **entities**: Classes de entidades e mapeamento ORM para banco de dados.
+- **repositories**: Interfaces JPA para comunicação com o banco de dados.
+- **security**: Configurações e classes de segurança JWT e autenticação.
+- **services**: Classes de serviços com lógica de negócio.
+- **utils**: Utilitários, incluindo uma integração de busca de endereço por CEP.
 
-### 🎬 API ImperialFlix (Cinema/Filme)
+## Configurações e Dependências
 
-#### Descrição
+- **Java 17**
+- **Spring Boot 2.7**
+- **Banco de Dados**: PostgreSQL
+- **Segurança JWT**: Dependências Spring Security e JWT.
+- **Swagger** para documentação
+- **Mail Sender** para envio de emails
 
-A **ImperialFlix API** foi desenvolvida para gerenciar a relação entre cinema e filmes. Ela oferece endpoints para criar, recuperar, atualizar e deletar cinemas e filmes.
+As principais dependências estão configuradas no `pom.xml` (para Maven) ou `build.gradle` (para Gradle).
 
+## Como Executar
+
+### Pré-requisitos
+
+1. **Instalar Java 17**.
+2. **Configurar o PostgreSQL**:
+   - Crie um banco de dados chamado `imperialflix`.
+   - Atualize as configurações de `application.properties` com as credenciais do banco.
+
+3. **Configurar Variáveis de Ambiente**:
+   - No arquivo `application.properties`, preencha as configurações de email e JWT.
 
 ## Endpoints
+### Autenticação e Autorização
+- /auth/login (POST): Autentica o usuário e retorna um token JWT.
+- /auth/signup (POST): Registra um novo usuário.
+### Endpoints de Cinema
+- /cinema (GET): Lista todos os cinemas.
+- /cinema/{id} (GET): Obtém um cinema pelo ID.
+- /cinema (POST): Cria um novo cinema.
+- /cinema/{id} (PUT): Atualiza um cinema existente.
+- /cinema/{id} (DELETE): Deleta um cinema pelo ID.
+### Endpoints de Filme
+- /filmes (GET): Lista todos os filmes.
+- /filmes/{id} (GET): Obtém um filme pelo ID.
+- /filmes (POST): Cria um novo filme.
+- /filmes/{id} (PUT): Atualiza um filme existente.
+- /filmes/{id} (DELETE): Deleta um filme pelo ID.
+### Endpoints de Endereço
+- /endereco (GET): Lista todos os endereços.
+- /endereco/{id} (GET): Obtém um endereço pelo ID.
+- /endereco (POST): Cria um novo endereço.
+- /endereco/{id} (PUT): Atualiza um endereço existente.
+- /endereco/{id} (DELETE): Deleta um endereço pelo ID.
+### Endpoints de Email
+- /filme/envioemail (GET): Envia um email de teste em HTML com anexo.
+## Diagrama ER
 
-### Operações de Cinema
+Relacionamentos
+O diagrama ER abaixo detalha as relações principais entre as entidades:
 
-- `GET /cinemas`: Retorna a lista de cinema.
-- `GET /cinemas/{id}`: Retorna os detalhes de um cinema específico com base no ID.
-- `POST /cinemas`: Cria um novo cinema.
-- `PUT /cinemas/{id}`: Atualiza as informações de um cinema existente.
-- `DELETE /cinemas/{id}`: Remove um cinema pelo ID.
-- `GET /cinemas/count`: Retorna a quantidade total de cinemas cadastrados.
+![ImperialFlix](diagramaER_imperialFlix.jpg)
 
-### Operações de Filme
+Cinema possui uma relação @OneToOne com Endereco, significando que cada cinema possui um único endereço associado.  
+Cinema possui uma relação @OneToMany com Filme, indicando que um cinema pode ter vários filmes em exibição.  
+User possui relações @ManyToMany com Role e Filme.
 
-- `GET /filmes`: Retorna a lista de todos os filmes.
-- `GET /filmes/{id}`: Retorna os detalhes de um filme específico com base no ID.
-- `POST /filmes`: Cria um novo filme.
-- `PUT /filmes/{id}`: Atualiza as informações de um filme existente.
-- `DELETE /filmes/{id}`: Remove um filme pelo ID.
-- `GET /filmes/count`: Retorna a quantidade total de filmes cadastrados.
+## Exemplos de Requisições
+### Autenticação (Login)
+POST /auth/login
+Content-Type: application/json  
+{  
+  "username": "user123",  
+  "password": "senhaSegura"  
+}
 
+### Resposta:
+{
+  "token": "eyJhbGciOiJIUzUxMiJ9...",  
+  "type": "Bearer",  
+  "id": 1,  
+  "username": "user123",  
+  "email": "user@example.com",  
+  "roles": ["ROLE_USER"]  
+}
 
-## Relacionamento entre Entidades (OneToMany, ManyToOne, OneToOne, ManyToMany)
+### Criação de Cinema
+POST /cinema
+Content-Type: application/json
+Authorization: Bearer {token}
 
-### ManyToOne (Muitos para Um)
+{
+  "nome": "Cinema Imperial",  
+  "sala": 5,  
+  "valor": 25.50,  
+  "horario": "14:00",  
+  "endereco": {  
+    "id": 1,  
+    "cep": "12345678",  
+    "logradouro": "Av. das Flores",  
+    "bairro": "Centro",  
+    "localidade": "Imperial",  
+    "uf": "SP"  
+  },  
+  "filmesIds": [1, 2]  
+}
+### Resposta:
+{
+  "id": 3,  
+  "nome": "Cinema Imperial",  
+  "sala": 5,  
+  "valor": 25.50,  
+  "horario": "14:00",  
+  "endereco": {  
+    "id": 1,  
+    "cep": "12345678",  
+    "logradouro": "Av. das Flores",  
+    "bairro": "Centro",  
+    "localidade": "Imperial",  
+    "uf": "SP"  
+  },  
+  "filmes": [  
+    {  
+      "id": 1,  
+      "nome": "Filme Exemplo",  
+      "genero": "Aventura",  
+      "duracao": 120  
+    }  
+  ]  
+}  
+### Criação de Endereço
+POST /endereco  
+Content-Type: application/json  
+Authorization: Bearer {token}  
 
-- Vários filmes podem estar associado a um cinema.
-
-### OneToMany (Um para Muitos)
-
-- Um cinema pode estar associado a vários filmes.
-
-### OneToOne (Um para Um)
-
-- Um cinema está associado a um único endereço.
-
-### ManyToMany (Muitos para Muitos)
-
-- Vários usuários podem estar associados a vários filmes.
-- Vários filmes podem estar associados a vários usuários.
-
-## Pré-requisitos
-
-Para rodar este projeto localmente, é necessário:
-
-- **Java 17** ou superior
-- **Maven 3.6+**
-
----
-
-## 🔢Calculadora API
-
-### Descrição
-Este projeto é uma API simples de calculadora desenvolvida em **Java** com o framework **Spring Boot**. A API oferece operações básicas de uma calculadora, além de um conversor de peso no sistema solar.
-
-### Operações Básicas da Calculadora
-A API permite realizar as seguintes operações matemáticas:
-
-- **Soma**: Adiciona dois números inteiros.
-- **Subtração**: Subtrai dois números inteiros.
-- **Multiplicação**: Multiplica dois números inteiros.
-- **Divisão**: Divide dois números decimais.
-
-### Conversão de Peso no Sistema Solar
-A API oferece conversão do peso de uma pessoa em diferentes corpos celestes:
-
-- **Mercúrio**
-- **Vênus**
-- **Marte**
-- **Júpiter**
-- **Saturno**
-- **Urano**
-- **Netuno**
-- **Lua**
-- **Sol**
-
-### Endpoints
-
-#### Operações de Calculadora
-
-- `GET /Calculadora/Soma?N1={N1}&N2={N2}`: Soma dois números.
-- `GET /Calculadora/Subtração?N1={N1}&N2={N2}`: Subtrai o segundo número do primeiro.
-- `GET /Calculadora/Multiplicacão?N1={N1}&N2={N2}`: Multiplica dois números.
-- `GET /Calculadora/Divisão?N1={N1}&N2={N2}`: Divide o primeiro número pelo segundo.
-
-#### Conversão de Peso
-
-- `GET /SeuPesoNoSistemaSolar/Seu Peso em Mercurio?pesoNaTerra={peso}`: Converte o peso da Terra para Mercúrio.
-- `GET /SeuPesoNoSistemaSolar/Seu Peso em Venus?pesoNaTerra={peso}`: Converte o peso da Terra para Vênus.
-- `GET /SeuPesoNoSistemaSolar/Seu Peso em Marte?pesoNaTerra={peso}`: Converte o peso da Terra para Marte.
-- `GET /SeuPesoNoSistemaSolar/Seu Peso em Júpiter?pesoNaTerra={peso}`: Converte o peso da Terra para Júpiter.
-- `GET /SeuPesoNoSistemaSolar/Seu Peso em Saturno?pesoNaTerra={peso}`: Converte o peso da Terra para Saturno.
-- `GET /SeuPesoNoSistemaSolar/Seu Peso em Urano?pesoNaTerra={peso}`: Converte o peso da Terra para Urano.
-- `GET /SeuPesoNoSistemaSolar/Seu Peso em Netuno?pesoNaTerra={peso}`: Converte o peso da Terra para Netuno.
-- `GET /SeuPesoNoSistemaSolar/Seu Peso na Lua?pesoNaTerra={peso}`: Converte o peso da Terra para a Lua.
-- `GET /SeuPesoNoSistemaSolar/Seu Peso no Sol?pesoNaTerra={peso}`: Converte o peso da Terra para o Sol.
-
-
-## Pré-requisitos
-
-Para rodar este projeto localmente, é necessário:
-
-- **Java 17** ou superior
-- **Maven 3.6+**
-
----
-
-## 🚗Veículo API
-
-### Descrição
-Este projeto é uma API para gerenciamento de veículos desenvolvida em **Java** com o framework **Spring Boot**. A API permite realizar operações CRUD para veículos, como adicionar, atualizar, remover e listar veículos.
-
-### Operações de Veículos
-A API permite as seguintes operações:
-
-- **Adicionar Veículo**: Cria um novo veículo no sistema.
-- **Remover Veículo**: Remove um veículo existente pelo ID.
-- **Atualizar Veículo**: Atualiza os dados de um veículo.
-- **Buscar Veículo por ID**: Retorna os detalhes de um veículo pelo ID.
-- **Listar Veículos**: Lista todos os veículos cadastrados.
-
-### Endpoints
-
-#### Operações de Veículos
-
-- `POST /veiculos`: Adiciona um novo veículo.
-- `DELETE /veiculos/{id}`: Remove um veículo pelo ID.
-- `PUT /veiculos/{id}`: Atualiza os dados de um veículo pelo ID.
-- `GET /veiculos/{id}`: Retorna os detalhes de um veículo específico pelo ID.
-- `GET /veiculos`: Lista todos os veículos cadastrados.
+{  
+  "cep": "12345678",  
+  "logradouro": "Rua Exemplo",  
+  "complemento": "Apto 101",  
+  "bairro": "Bairro Exemplo",  
+  "localidade": "Cidade Exemplo",  
+  "uf": "SP",  
+  "estado": "São Paulo",  
+  "regiao": "Sudeste"  
+}
+### Resposta:
+{  
+  "id": 1,  
+  "cep": "12345678",  
+  "logradouro": "Rua Exemplo",  
+  "complemento": "Apto 101",  
+  "bairro": "Bairro Exemplo",  
+  "localidade": "Cidade Exemplo",  
+  "uf": "SP",  
+  "estado": "São Paulo",  
+  "regiao": "Sudeste"  
+}
 
 
-## Pré-requisitos
-
-Para rodar este projeto localmente, é necessário:
-
-- **Java 17** ou superior
-- **Maven 3.6+**
-
----
+   
