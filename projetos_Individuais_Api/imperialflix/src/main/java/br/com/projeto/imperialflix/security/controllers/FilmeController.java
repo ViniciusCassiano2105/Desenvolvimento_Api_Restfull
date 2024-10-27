@@ -1,13 +1,15 @@
 package br.com.projeto.imperialflix.security.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import br.com.projeto.imperialflix.security.entities.Filme;
+import br.com.projeto.imperialflix.security.dto.FilmeRequestDTO;
+import br.com.projeto.imperialflix.security.dto.FilmeResponseDTO;
 import br.com.projeto.imperialflix.security.services.FilmeService;
-
-import java.util.List;
-import java.util.Optional;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
 @RequestMapping("/filmes")
@@ -16,34 +18,43 @@ public class FilmeController {
     @Autowired
     private FilmeService filmeService;
 
-    @GetMapping
-    public List<Filme> getAllFilmes() {
-        return filmeService.findAll();
-    }
-
+    // Buscar um filme por ID
+    @SecurityRequirement(name = "Bearer Auth")
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     @GetMapping("/{id}")
-    public Optional<Filme> getFilmeById(@PathVariable Integer id) {
-        return filmeService.findById(id);
+    public FilmeResponseDTO buscarFilme(@PathVariable Integer id) {
+        return filmeService.buscarFilme(id);
     }
 
-    @PostMapping
-    public Filme createFilme(@RequestBody Filme filme) {
-        return filmeService.save(filme);
-    }
-
-    @PutMapping("/{id}")
-    public Filme updateFilme(@PathVariable Integer id, @RequestBody Filme filme) {
-        filme.setId(id); 
-        return filmeService.save(filme);
-    }
-
+    // Deletar um filme por ID
+    @SecurityRequirement(name = "Bearer Auth")
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     @DeleteMapping("/{id}")
-    public void deleteFilme(@PathVariable Integer id) {
-        filmeService.deleteById(id);
+    public void deletarFilme(@PathVariable Integer id) {
+        filmeService.deletarFilme(id);
     }
 
-    @GetMapping("/count")
-    public long getFilmeCount() {
-        return filmeService.getFilmeCount();
+    // Criar um novo filme
+    @SecurityRequirement(name = "Bearer Auth")
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
+    @PostMapping
+    public FilmeResponseDTO criarFilme(@RequestBody FilmeRequestDTO filmeRequestDTO) {
+        return filmeService.salvarFilme(filmeRequestDTO);
+    }
+
+    // Atualizar um filme existente
+    @SecurityRequirement(name = "Bearer Auth")
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
+    @PutMapping("/{id}")
+    public FilmeResponseDTO atualizarFilme(@PathVariable Integer id, @RequestBody FilmeRequestDTO filmeRequestDTO) {
+        return filmeService.atualizarFilme(id, filmeRequestDTO);
+    }
+
+    // Listar todos os filmes
+    @SecurityRequirement(name = "Bearer Auth")
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
+    @GetMapping
+    public List<FilmeResponseDTO> listarFilmes() {
+        return filmeService.listarFilmes();
     }
 }
