@@ -84,7 +84,6 @@ As principais dependências estão configuradas no `pom.xml` (para Maven) ou `bu
 - /filme/envioemail (GET): Envia um email de teste em HTML com anexo.
 ## Diagrama ER
 
-Relacionamentos
 O diagrama ER abaixo detalha as relações principais entre as entidades:
 
 ![ImperialFlix](diagramaER_imperialFlix.jpg)
