@@ -182,5 +182,8 @@ Authorization: Bearer {token}
   "regiao": "Sudeste"  
 }
 
+## Contato
+#### Desenvolvedor: Luiz Vinicius Cassiano Cunha
+#### Email: viniciuscassiano2105v@gmail.com
 
    
