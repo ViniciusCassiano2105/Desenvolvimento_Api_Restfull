@@ -23,67 +23,75 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import br.com.projeto.imperialflix.security.services.UserDetailsServiceImpl;
 
-
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
 public class WebSecurityConfig {
-	@Autowired
-	UserDetailsServiceImpl userDetailsService;
 
-	@Autowired
-	private AuthEntryPointJwt unauthorizedHandler;
+    @Autowired
+    UserDetailsServiceImpl userDetailsService;
 
-	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.cors(Customizer.withDefaults()).csrf(csrf -> csrf.disable())
-				.exceptionHandling(handling -> handling.authenticationEntryPoint(unauthorizedHandler))
-				.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				.authorizeHttpRequests(auth -> auth
-						.requestMatchers("/g6/**", "/auth/**", "/h2-console/**", "/roles/**", "/test/all/**",
-								"/swagger-ui/**", "/v3/api-docs/**", "/actuator/**", "/cinemas/**", "/endereco/**").permitAll()
-						.requestMatchers("/test/user/**").hasAnyRole("USER", "ADMIN")
-						.requestMatchers("/test/admin/**").hasRole("ADMIN")
-						.anyRequest().authenticated());
+    @Autowired
+    private AuthEntryPointJwt unauthorizedHandler;
 
-		http.authenticationProvider(authenticationProvider());
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.cors(Customizer.withDefaults()).csrf(csrf -> csrf.disable())
+            .exceptionHandling(handling -> handling.authenticationEntryPoint(unauthorizedHandler))
+            .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authorizeHttpRequests(auth -> auth
+                // Rotas públicas
+                .requestMatchers("/imperialflix/**","/auth/**", "/roles/**", "/swagger-ui/**", "/h2-console/**", "/v3/api-docs/**", "/actuator/**").permitAll()
 
-		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-		return http.build();
-	}
+                // Rotas acessíveis para usuários com papéis USER e ADMIN
+                .requestMatchers("/filmes/**", "/filmes/cadastrar/**", "/cinemas/**", "/endereco/**").hasAnyRole("USER", "ADMIN")
 
-	@Bean
-	CorsConfigurationSource corsConfigurationSource() {
-		CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowedOrigins(Arrays.asList("*"));
-		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT"));
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", configuration);
-		return source;
-	}
+                // Rotas acessíveis apenas para ADMIN
+                .requestMatchers("/roles/**", "/test/admin/**").hasRole("ADMIN")
 
-	@Bean
-	public AuthTokenFilter authenticationJwtTokenFilter() {
-		return new AuthTokenFilter();
-	}
+                // Qualquer outra rota precisa de autenticação
+                .anyRequest().authenticated());
 
-	@Bean
-	public DaoAuthenticationProvider authenticationProvider() {
-		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        // Configuração para o provedor de autenticação JWT
+        http.authenticationProvider(authenticationProvider());
 
-		authProvider.setUserDetailsService(userDetailsService);
-		authProvider.setPasswordEncoder(passwordEncoder());
+        // Adiciona o filtro JWT antes do filtro de autenticação padrão do Spring
+        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        
+        return http.build();
+    }
 
-		return authProvider;
-	}
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*")); // Permite todas as origens (ajuste conforme necessário)
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE")); // Define os métodos HTTP permitidos
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type")); // Define os headers permitidos
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 
-	@Bean
-	public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-		return authConfig.getAuthenticationManager();
-	}
+    @Bean
+    public AuthTokenFilter authenticationJwtTokenFilter() {
+        return new AuthTokenFilter();
+    }
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+        return authConfig.getAuthenticationManager();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }
