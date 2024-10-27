@@ -7,10 +7,9 @@ Este projeto inclui operações CRUD completas para a entidade Cinema e operaç�
 1. [Recursos](#recursos)
 2. [Arquitetura do Projeto](#arquitetura-do-projeto)
 3. [Configurações e Dependências](#configurações-e-dependências)
-4. [Como Executar](#como-executar)
-5. [Endpoints](#endpoints)
-6. [Diagrama ER](#diagrama-er)
-7. [Exemplos de Requisições](#exemplos-de-requisições)
+4. [Endpoints](#endpoints)
+5. [Diagrama ER](#diagrama-er)
+6. [Exemplos de Requisições](#exemplos-de-requisições)
 
 ## Recursos
 
